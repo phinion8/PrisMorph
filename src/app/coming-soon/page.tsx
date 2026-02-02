@@ -85,20 +85,33 @@ export default function ComingSoon() {
         }}
       />
 
-      {/* Floating Particles */}
+      {/* Tilted Rain Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-primary-400/30 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${5 + Math.random() * 5}s`,
-            }}
-          />
-        ))}
+        <div className="rain-drop" style={{ left: '2%', animationDuration: '2.5s', animationDelay: '0s', height: '25px' }} />
+        <div className="rain-drop" style={{ left: '7%', animationDuration: '3.0s', animationDelay: '0.5s', height: '30px' }} />
+        <div className="rain-drop" style={{ left: '12%', animationDuration: '2.3s', animationDelay: '1.0s', height: '18px' }} />
+        <div className="rain-drop" style={{ left: '17%', animationDuration: '2.8s', animationDelay: '0.3s', height: '28px' }} />
+        <div className="rain-drop" style={{ left: '22%', animationDuration: '2.6s', animationDelay: '1.2s', height: '22px' }} />
+        <div className="rain-drop" style={{ left: '27%', animationDuration: '3.2s', animationDelay: '0.7s', height: '35px' }} />
+        <div className="rain-drop" style={{ left: '32%', animationDuration: '2.2s', animationDelay: '1.5s', height: '15px' }} />
+        <div className="rain-drop" style={{ left: '37%', animationDuration: '2.9s', animationDelay: '0.2s', height: '26px' }} />
+        <div className="rain-drop" style={{ left: '42%', animationDuration: '2.5s', animationDelay: '1.8s', height: '20px' }} />
+        <div className="rain-drop" style={{ left: '47%', animationDuration: '3.1s', animationDelay: '0.9s', height: '32px' }} />
+        <div className="rain-drop" style={{ left: '52%', animationDuration: '2.4s', animationDelay: '2.0s', height: '17px' }} />
+        <div className="rain-drop" style={{ left: '57%', animationDuration: '2.7s', animationDelay: '0.4s', height: '24px' }} />
+        <div className="rain-drop" style={{ left: '62%', animationDuration: '2.9s', animationDelay: '1.3s', height: '28px' }} />
+        <div className="rain-drop" style={{ left: '67%', animationDuration: '3.3s', animationDelay: '0.6s', height: '33px' }} />
+        <div className="rain-drop" style={{ left: '72%', animationDuration: '2.2s', animationDelay: '1.7s', height: '16px' }} />
+        <div className="rain-drop" style={{ left: '77%', animationDuration: '2.6s', animationDelay: '0.8s', height: '23px' }} />
+        {/* Second layer for density */}
+        <div className="rain-drop" style={{ left: '5%', animationDuration: '2.7s', animationDelay: '2.2s', height: '22px' }} />
+        <div className="rain-drop" style={{ left: '15%', animationDuration: '2.5s', animationDelay: '2.5s', height: '19px' }} />
+        <div className="rain-drop" style={{ left: '25%', animationDuration: '2.9s', animationDelay: '2.3s', height: '29px' }} />
+        <div className="rain-drop" style={{ left: '35%', animationDuration: '2.3s', animationDelay: '2.7s', height: '18px' }} />
+        <div className="rain-drop" style={{ left: '45%', animationDuration: '3.1s', animationDelay: '2.1s', height: '34px' }} />
+        <div className="rain-drop" style={{ left: '55%', animationDuration: '2.4s', animationDelay: '2.6s', height: '20px' }} />
+        <div className="rain-drop" style={{ left: '65%', animationDuration: '2.8s', animationDelay: '2.4s', height: '26px' }} />
+        <div className="rain-drop" style={{ left: '75%', animationDuration: '2.6s', animationDelay: '2.8s', height: '23px' }} />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

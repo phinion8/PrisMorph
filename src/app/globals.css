@@ -114,3 +114,51 @@ body {
 .animate-spin-reverse {
   animation: spin-reverse 1.5s linear infinite;
 }
+
+/* Rain Animation - Tilted in direction of movement */
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-50px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100vh) translateX(200px);
+    opacity: 0;
+  }
+}
+
+.rain-drop {
+  position: absolute;
+  top: -30px;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.2) 30%,
+    rgba(139, 92, 246, 0.6) 100%
+  );
+  border-radius: 100px;
+  transform: rotate(-55deg);
+  transform-origin: top center;
+  animation: rain-fall linear infinite;
+}
+
+.rain-drop::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  background: rgba(139, 92, 246, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
+}

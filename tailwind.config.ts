@@ -38,6 +38,8 @@ const config: Config = {
         "gradient": "gradient 8s linear infinite",
         "float": "float 6s ease-in-out infinite",
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "shooting-star": "shootingStar 3s ease-in-out infinite",
+        "rain": "rain linear infinite",
       },
       keyframes: {
         gradient: {
@@ -47,6 +49,38 @@ const config: Config = {
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
+        },
+        shootingStar: {
+          "0%": {
+            transform: "translateX(0) translateY(0) rotate(-45deg)",
+            opacity: "0",
+          },
+          "5%": {
+            opacity: "1",
+          },
+          "50%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateX(500px) translateY(500px) rotate(-45deg)",
+            opacity: "0",
+          },
+        },
+        rain: {
+          "0%": {
+            transform: "translateY(-20px) translateX(0) rotate(20deg)",
+            opacity: "0",
+          },
+          "5%": {
+            opacity: "1",
+          },
+          "95%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateY(1000px) translateX(200px) rotate(20deg)",
+            opacity: "0",
+          },
         },
       },
     },
