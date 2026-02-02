@@ -1,39 +1,44 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const transformations = [
   {
     id: 1,
     name: "Cyberpunk Glow",
     description: "Transform portraits into neon-lit cyberpunk art",
-    before: "bg-gradient-to-br from-gray-400 to-gray-600",
-    after: "bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500",
+    beforeImage: "/images/before_image_1.webp",
+    afterImage: "/images/after_image_1.webp",
     icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    gradient: "from-cyan-400 via-purple-500 to-pink-500",
   },
   {
     id: 2,
     name: "Oil Painting",
     description: "Classic oil painting effect with rich textures",
-    before: "bg-gradient-to-br from-gray-400 to-gray-600",
-    after: "bg-gradient-to-br from-amber-600 via-orange-500 to-yellow-400",
+    beforeImage: "/images/before_image_1.webp",
+    afterImage: "/images/after_image_1.webp",
     icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
+    gradient: "from-amber-600 via-orange-500 to-yellow-400",
   },
   {
     id: 3,
     name: "Anime Style",
     description: "Convert photos to stunning anime artwork",
-    before: "bg-gradient-to-br from-gray-400 to-gray-600",
-    after: "bg-gradient-to-br from-pink-400 via-rose-400 to-red-400",
+    beforeImage: "/images/before_image_1.webp",
+    afterImage: "/images/after_image_1.webp",
     icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    gradient: "from-pink-400 via-rose-400 to-red-400",
   },
   {
     id: 4,
     name: "Watercolor",
     description: "Soft watercolor effect with gentle color bleeds",
-    before: "bg-gradient-to-br from-gray-400 to-gray-600",
-    after: "bg-gradient-to-br from-blue-300 via-teal-300 to-green-300",
+    beforeImage: "/images/before_image_1.webp",
+    afterImage: "/images/after_image_1.webp",
     icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
+    gradient: "from-blue-300 via-teal-300 to-green-300",
   },
 ];
 
@@ -61,48 +66,28 @@ export default function BeforeAfter() {
             <div className="relative aspect-square rounded-3xl overflow-hidden glass p-2">
               <div className="relative w-full h-full rounded-2xl overflow-hidden">
                 {/* After Image (Background) */}
-                <div
-                  className={`absolute inset-0 ${activeTransform.after} flex items-center justify-center`}
-                >
-                  <div className="text-center text-white/80">
-                    <svg
-                      className="w-16 h-16 mx-auto mb-2 opacity-50"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-sm font-medium">After</span>
-                  </div>
+                <div className="absolute inset-0">
+                  <Image
+                    src={activeTransform.afterImage}
+                    alt="After transformation"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </div>
 
                 {/* Before Image (Overlay with clip) */}
                 <div
-                  className={`absolute inset-0 ${activeTransform.before} flex items-center justify-center`}
+                  className="absolute inset-0"
                   style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
                 >
-                  <div className="text-center text-white/80">
-                    <svg
-                      className="w-16 h-16 mx-auto mb-2 opacity-50"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-sm font-medium">Before</span>
-                  </div>
+                  <Image
+                    src={activeTransform.beforeImage}
+                    alt="Before transformation"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </div>
 
                 {/* Slider Control */}
@@ -165,7 +150,7 @@ export default function BeforeAfter() {
               >
                 <div className="flex items-center gap-4">
                   <div
-                    className={`w-12 h-12 rounded-xl ${transform.after} flex items-center justify-center`}
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${transform.gradient} flex items-center justify-center`}
                   >
                     <svg
                       className="w-6 h-6 text-white"
