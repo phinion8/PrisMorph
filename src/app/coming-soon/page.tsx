@@ -67,7 +67,7 @@ export default function ComingSoon() {
   ];
 
   return (
-    <main className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <main className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 sm:py-8">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-primary-500/20 rounded-full blur-3xl animate-pulse" />
