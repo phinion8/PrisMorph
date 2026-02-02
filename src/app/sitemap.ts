@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { blogPosts } from "@/data/blog";
+import { blogPosts, getAllTags, tagToSlug } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://prismorph.com";
@@ -95,5 +95,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...blogPages];
+  // Tag pages
+  const tagPages: MetadataRoute.Sitemap = getAllTags().map((tag) => ({
+    url: `${baseUrl}/blog/tag/${tagToSlug(tag)}`,
+    lastModified: currentDate,
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...blogPages, ...tagPages];
 }

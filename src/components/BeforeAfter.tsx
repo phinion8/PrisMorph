@@ -1,29 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 const transformations = [
   {
     id: 1,
-    name: "Cyberpunk Glow",
-    description: "Transform portraits into neon-lit cyberpunk art",
-    beforeImage: "/images/before_image_1.webp",
-    afterImage: "/images/after_image_1.webp",
-    icon: "M13 10V3L4 14h7v7l9-11h-7z",
-    gradient: "from-cyan-400 via-purple-500 to-pink-500",
-  },
-  {
-    id: 2,
-    name: "Oil Painting",
-    description: "Classic oil painting effect with rich textures",
-    beforeImage: "/images/before_image_1.webp",
-    afterImage: "/images/after_image_1.webp",
-    icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
-    gradient: "from-amber-600 via-orange-500 to-yellow-400",
-  },
-  {
-    id: 3,
     name: "Anime Style",
     description: "Convert photos to stunning anime artwork",
     beforeImage: "/images/before_image_1.webp",
@@ -32,11 +14,29 @@ const transformations = [
     gradient: "from-pink-400 via-rose-400 to-red-400",
   },
   {
+    id: 2,
+    name: "Cyberpunk Glow",
+    description: "Transform portraits into neon-lit cyberpunk art",
+    beforeImage: "/images/cyberpunk_before.webp",
+    afterImage: "/images/cyberpunk_after.webp",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    gradient: "from-cyan-400 via-purple-500 to-pink-500",
+  },
+  {
+    id: 3,
+    name: "Oil Painting",
+    description: "Classic oil painting effect with rich textures",
+    beforeImage: "/images/oil_painting_before.webp",
+    afterImage: "/images/oil_painting_after.webp",
+    icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
+    gradient: "from-amber-600 via-orange-500 to-yellow-400",
+  },
+  {
     id: 4,
     name: "Watercolor",
     description: "Soft watercolor effect with gentle color bleeds",
-    beforeImage: "/images/before_image_1.webp",
-    afterImage: "/images/after_image_1.webp",
+    beforeImage: "/images/watercolor_before.webp",
+    afterImage: "/images/watercolor_after.webp",
     icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
     gradient: "from-blue-300 via-teal-300 to-green-300",
   },
@@ -45,6 +45,34 @@ const transformations = [
 export default function BeforeAfter() {
   const [activeTransform, setActiveTransform] = useState(transformations[0]);
   const [sliderPosition, setSliderPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleSliderChange = useCallback((clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (isDragging) handleSliderChange(e.clientX);
+  }, [isDragging, handleSliderChange]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (isDragging) handleSliderChange(e.touches[0].clientX);
+  }, [isDragging, handleSliderChange]);
+
+  useEffect(() => {
+    const handleUp = () => setIsDragging(false);
+    window.addEventListener('mouseup', handleUp);
+    window.addEventListener('touchend', handleUp);
+    return () => {
+      window.removeEventListener('mouseup', handleUp);
+      window.removeEventListener('touchend', handleUp);
+    };
+  }, []);
 
   return (
     <section id="showcase" className="py-12 sm:py-16 relative">
@@ -63,20 +91,26 @@ export default function BeforeAfter() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Before/After Slider */}
           <div className="relative">
-            <div className="relative aspect-square rounded-3xl overflow-hidden glass p-2">
-              <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                {/* After Image (Background) */}
+            <div
+              ref={containerRef}
+              className="relative aspect-square rounded-3xl overflow-hidden glass p-2"
+              onMouseMove={handleMouseMove}
+              onTouchMove={handleTouchMove}
+            >
+              <div className="relative w-full h-full rounded-2xl overflow-hidden select-none">
+                {/* After Image */}
                 <div className="absolute inset-0">
                   <Image
                     src={activeTransform.afterImage}
                     alt="After transformation"
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     priority
+                    draggable={false}
                   />
                 </div>
 
-                {/* Before Image (Overlay with clip) */}
+                {/* Before Image */}
                 <div
                   className="absolute inset-0"
                   style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
@@ -85,19 +119,48 @@ export default function BeforeAfter() {
                     src={activeTransform.beforeImage}
                     alt="Before transformation"
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     priority
+                    draggable={false}
                   />
                 </div>
 
-                {/* Slider Control */}
+                {/* Slider Line & Handle */}
                 <div
-                  className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"
-                  style={{ left: `${sliderPosition}%` }}
+                  className="absolute top-0 bottom-0 z-10"
+                  style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
                 >
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+                  {/* Vertical Line */}
+                  <div
+                    className={`absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 transition-all duration-300 ${
+                      isDragging ? 'bg-primary-400' : 'bg-white'
+                    }`}
+                    style={{
+                      boxShadow: isDragging
+                        ? '0 0 12px rgba(139, 92, 246, 0.8), 0 0 24px rgba(139, 92, 246, 0.4)'
+                        : '0 0 8px rgba(255, 255, 255, 0.5)',
+                    }}
+                  />
+
+                  {/* Handle */}
+                  <div
+                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full cursor-ew-resize flex items-center justify-center transition-all duration-300 ${
+                      isDragging
+                        ? 'bg-primary-500 scale-110'
+                        : 'bg-white hover:scale-105'
+                    }`}
+                    style={{
+                      boxShadow: isDragging
+                        ? '0 0 20px rgba(139, 92, 246, 0.6), 0 4px 12px rgba(0, 0, 0, 0.3)'
+                        : '0 4px 12px rgba(0, 0, 0, 0.3)',
+                    }}
+                    onMouseDown={() => setIsDragging(true)}
+                    onTouchStart={() => setIsDragging(true)}
+                  >
                     <svg
-                      className="w-5 h-5 text-gray-800"
+                      className={`w-5 h-5 transition-colors duration-300 ${
+                        isDragging ? 'text-white' : 'text-gray-700'
+                      }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -112,14 +175,16 @@ export default function BeforeAfter() {
                   </div>
                 </div>
 
-                {/* Slider Input */}
+                {/* Invisible Slider */}
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={sliderPosition}
                   onChange={(e) => setSliderPosition(Number(e.target.value))}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize"
+                  onMouseDown={() => setIsDragging(true)}
+                  onTouchStart={() => setIsDragging(true)}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
                 />
               </div>
             </div>

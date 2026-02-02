@@ -587,3 +587,27 @@ export function getRelatedPosts(currentSlug: string, limit: number = 3): BlogPos
     )
     .slice(0, limit);
 }
+
+export function getAllTags(): string[] {
+  const tags = new Set<string>();
+  blogPosts.forEach((post) => {
+    post.tags.forEach((tag) => tags.add(tag));
+  });
+  return Array.from(tags).sort();
+}
+
+export function getPostsByTag(tag: string): BlogPost[] {
+  const normalizedTag = tag.toLowerCase();
+  return blogPosts.filter((post) =>
+    post.tags.some((t) => t.toLowerCase() === normalizedTag)
+  );
+}
+
+export function tagToSlug(tag: string): string {
+  return tag.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+}
+
+export function slugToTag(slug: string): string | undefined {
+  const allTags = getAllTags();
+  return allTags.find((tag) => tagToSlug(tag) === slug);
+}

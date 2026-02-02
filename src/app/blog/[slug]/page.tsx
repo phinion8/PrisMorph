@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { blogPosts, getPostBySlug, getRelatedPosts } from "@/data/blog";
+import { blogPosts, getPostBySlug, getRelatedPosts, tagToSlug } from "@/data/blog";
 import BlogCard from "@/components/BlogCard";
 
 interface BlogPostPageProps {
@@ -245,12 +245,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-12 pb-12 border-b border-white/10">
             {post.tags.map((tag) => (
-              <span
+              <Link
                 key={tag}
-                className="px-3 py-1 rounded-full text-sm bg-white/5 text-gray-400"
+                href={`/blog/tag/${tagToSlug(tag)}`}
+                className="px-3 py-1 rounded-full text-sm bg-white/5 text-gray-400 hover:bg-primary-500/20 hover:text-primary-400 transition-all"
               >
                 #{tag}
-              </span>
+              </Link>
             ))}
           </div>
 
