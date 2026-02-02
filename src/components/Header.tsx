@@ -114,10 +114,10 @@ export default function Header() {
         {/* Mobile Navigation */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
-            isMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+            isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-4 pb-6 pt-2 border-t border-white/10">
+          <div className="px-4 pb-4 pt-2 border-t border-white/10">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
@@ -132,7 +132,7 @@ export default function Header() {
               <Link
                 href="/coming-soon"
                 onClick={() => setIsMenuOpen(false)}
-                className="mt-2 mb-4 px-4 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-center"
+                className="mt-3 px-4 py-4 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-center"
               >
                 Get App
               </Link>

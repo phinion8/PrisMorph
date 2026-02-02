@@ -399,7 +399,7 @@ export default function BeforeAfter() {
             <div className="mt-3 px-4">
               <div className="h-1 bg-white/10 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-100"
+                  className="h-full bg-gradient-to-r from-primary-500 to-accent-500"
                   style={{ width: `${sliderPosition}%` }}
                 />
               </div>
