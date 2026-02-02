@@ -33,7 +33,7 @@ const galleryItems = [
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="py-20 sm:py-32 relative overflow-hidden">
+    <section id="gallery" className="py-12 sm:py-16 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
@@ -130,25 +130,6 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* View More Button */}
-        <div className="text-center mt-12">
-          <button className="px-8 py-4 rounded-full glass glass-hover text-white font-semibold inline-flex items-center gap-2">
-            View All Styles
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </button>
-        </div>
       </div>
     </section>
   );

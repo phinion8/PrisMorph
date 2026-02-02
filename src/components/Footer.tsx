@@ -6,13 +6,13 @@ const footerLinks = {
     { name: "Pricing", href: "#pricing" },
   ],
   company: [
-    { name: "About Us", href: "#about" },
-    { name: "Blog", href: "#blog" },
+    { name: "About Us", href: "/about" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "mailto:hello@prismorph.com" },
   ],
   resources: [
     { name: "Help Center", href: "mailto:support@prismorph.com" },
-    { name: "FAQs", href: "#pricing" },
+    { name: "FAQs", href: "/faq" },
     { name: "Tutorials", href: "#how-it-works" },
   ],
   legal: [

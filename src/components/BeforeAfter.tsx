@@ -42,7 +42,7 @@ export default function BeforeAfter() {
   const [sliderPosition, setSliderPosition] = useState(50);
 
   return (
-    <section id="showcase" className="py-20 sm:py-32 relative">
+    <section id="showcase" className="py-12 sm:py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">

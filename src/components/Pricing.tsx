@@ -93,7 +93,7 @@ export default function Pricing() {
   const [activeTab, setActiveTab] = useState<"credits" | "subscription">("subscription");
 
   return (
-    <section id="pricing" className="py-20 sm:py-32 relative">
+    <section id="pricing" className="py-12 sm:py-16 relative">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
@@ -137,11 +137,11 @@ export default function Pricing() {
 
         {/* Subscription Plans */}
         {activeTab === "subscription" && (
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 animate-fade-in">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 animate-fade-in items-stretch">
             {subscriptionPlans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative rounded-3xl p-6 sm:p-8 transition-all duration-300 ${
+                className={`relative rounded-3xl p-6 sm:p-8 transition-all duration-300 flex flex-col h-full ${
                   plan.popular
                     ? "glass border-primary-500/50 scale-[1.02] shadow-xl shadow-primary-500/10"
                     : "glass glass-hover"
@@ -180,7 +180,7 @@ export default function Pricing() {
                 </div>
 
                 {/* Features */}
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 flex-grow">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <svg className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,7 +195,7 @@ export default function Pricing() {
                 <a
                   href="/coming-soon"
                   target="_blank"
-                  className={`block w-full py-3.5 rounded-2xl font-semibold text-center transition-all duration-300 ${
+                  className={`block w-full py-3.5 rounded-2xl font-semibold text-center transition-all duration-300 mt-8 ${
                     plan.popular
                       ? "bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:opacity-90 shadow-lg shadow-primary-500/25"
                       : "bg-white/5 border border-white/10 text-white hover:bg-white/10"

@@ -18,10 +18,53 @@ export default function RefundPolicy() {
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold text-white mb-4">2. Credit Pack Refunds</h2>
+      <section className="p-6 rounded-2xl bg-amber-500/10 border border-amber-500/20">
+        <h2 className="text-2xl font-bold text-amber-400 mb-4">Important: App Store Purchases</h2>
+        <p>
+          If you purchased a subscription or credits through the <strong>Apple App Store</strong> or{" "}
+          <strong>Google Play Store</strong>, refunds are handled directly by Apple or Google,
+          not by Prismorph. Please contact them for refund requests:
+        </p>
+        <ul className="list-none space-y-3 mt-4">
+          <li className="flex items-start gap-3">
+            <svg className="w-6 h-6 text-gray-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+            </svg>
+            <div>
+              <strong className="text-white">Apple App Store</strong>
+              <p className="text-sm mt-1">
+                Request refund at{" "}
+                <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">
+                  reportaproblem.apple.com
+                </a>
+              </p>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <svg className="w-6 h-6 text-gray-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
+            </svg>
+            <div>
+              <strong className="text-white">Google Play Store</strong>
+              <p className="text-sm mt-1">
+                Request refund at{" "}
+                <a href="https://play.google.com/store/account/subscriptions" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300">
+                  play.google.com/store/account/subscriptions
+                </a>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
 
-        <h3 className="text-xl font-semibold text-white mb-3">2.1 Eligibility</h3>
+      <section>
+        <h2 className="text-2xl font-bold text-white mb-4">2. Web Purchases</h2>
+        <p>
+          For purchases made directly on our website (prismorph.com), the following refund
+          policies apply:
+        </p>
+
+        <h3 className="text-xl font-semibold text-white mb-3 mt-6">2.1 Credit Pack Refunds</h3>
         <p>You may be eligible for a refund on credit pack purchases if:</p>
         <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
           <li>You request a refund within <strong>7 days</strong> of purchase</li>
@@ -39,43 +82,38 @@ export default function RefundPolicy() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-white mb-4">3. Subscription Refunds</h2>
+        <h2 className="text-2xl font-bold text-white mb-4">3. Subscription Cancellation</h2>
 
-        <h3 className="text-xl font-semibold text-white mb-3">3.1 Monthly & Weekly Subscriptions</h3>
-        <ul className="list-disc list-inside space-y-2 ml-4">
-          <li>You can cancel anytime; cancellation takes effect at the end of the billing period</li>
-          <li>Partial refunds are not provided for unused days in the billing period</li>
-          <li>Full refund available within <strong>48 hours</strong> of first subscription if no credits used</li>
-        </ul>
-
-        <h3 className="text-xl font-semibold text-white mb-3 mt-6">3.2 Annual Subscriptions</h3>
-        <ul className="list-disc list-inside space-y-2 ml-4">
-          <li>Full refund available within <strong>14 days</strong> of purchase if no credits used</li>
-          <li>Pro-rated refunds may be considered within the first 30 days on a case-by-case basis</li>
-          <li>No refunds after 30 days from purchase date</li>
-        </ul>
-
-        <h3 className="text-xl font-semibold text-white mb-3 mt-6">3.3 Subscription Credits</h3>
+        <h3 className="text-xl font-semibold text-white mb-3">3.1 How to Cancel</h3>
         <p>
-          Monthly subscription credits that go unused do not roll over and are not refundable.
-          We recommend choosing a plan that matches your expected usage.
+          To cancel your subscription, you must do so through the platform where you originally subscribed:
         </p>
+        <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
+          <li><strong>Apple App Store:</strong> Settings → Apple ID → Subscriptions → Prismorph → Cancel</li>
+          <li><strong>Google Play:</strong> Play Store → Menu → Subscriptions → Prismorph → Cancel</li>
+          <li><strong>Website:</strong> Account Settings → Subscription → Cancel</li>
+        </ul>
+
+        <h3 className="text-xl font-semibold text-white mb-3 mt-6">3.2 What Happens After Cancellation</h3>
+        <ul className="list-disc list-inside space-y-2 ml-4">
+          <li>You'll continue to have access until the end of your billing period</li>
+          <li>Unused subscription credits expire at the end of the billing period</li>
+          <li>Purchased credit packs remain available (they don't expire)</li>
+          <li>You can resubscribe at any time</li>
+        </ul>
       </section>
 
       <section>
         <h2 className="text-2xl font-bold text-white mb-4">4. Technical Issues</h2>
         <p>
-          If you experience technical issues that prevent you from using the Service, we will:
+          If you experience technical issues that prevent you from using the Service:
         </p>
         <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
-          <li><strong>First,</strong> work with you to resolve the issue</li>
-          <li><strong>If unresolved,</strong> provide credit compensation for failed transformations</li>
-          <li><strong>In extreme cases,</strong> offer a full or partial refund at our discretion</li>
+          <li>Contact us at <a href="mailto:support@prismorph.com" className="text-primary-400 hover:text-primary-300">support@prismorph.com</a></li>
+          <li>We will work with you to resolve the issue</li>
+          <li>Credit compensation may be provided for failed transformations</li>
+          <li>Report issues within <strong>72 hours</strong> with screenshots if possible</li>
         </ul>
-        <p className="mt-4">
-          Please report technical issues within <strong>72 hours</strong> of occurrence with screenshots
-          or details of the problem.
-        </p>
       </section>
 
       <section>
@@ -90,102 +128,40 @@ export default function RefundPolicy() {
           <li>The source image quality affected the output</li>
         </ul>
         <p className="mt-4">
-          We recommend trying the demo or free credits before making a purchase to ensure our
+          We recommend trying the free transformations before making a purchase to ensure our
           Service meets your needs.
         </p>
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-white mb-4">6. How to Request a Refund</h2>
-        <p>To request a refund:</p>
-        <ol className="list-decimal list-inside space-y-3 ml-4 mt-3">
-          <li>
-            <strong>Email us</strong> at{" "}
-            <a href="mailto:refunds@prismorph.com" className="text-primary-400 hover:text-primary-300">
-              refunds@prismorph.com
-            </a>
-          </li>
-          <li>
-            <strong>Include:</strong>
-            <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
-              <li>Your account email</li>
-              <li>Order/transaction ID</li>
-              <li>Date of purchase</li>
-              <li>Reason for refund request</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Wait for response:</strong> We will review your request within 3-5 business days
-          </li>
-        </ol>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold text-white mb-4">7. Refund Processing</h2>
-        <p>Once approved:</p>
-        <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
-          <li>Refunds are processed to the original payment method</li>
-          <li>Credit card refunds may take <strong>5-10 business days</strong> to appear</li>
-          <li>You will receive an email confirmation when the refund is processed</li>
-          <li>Associated credits will be removed from your account</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold text-white mb-4">8. Chargebacks</h2>
+        <h2 className="text-2xl font-bold text-white mb-4">6. Contact Us</h2>
         <p>
-          If you initiate a chargeback with your bank before contacting us:
-        </p>
-        <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
-          <li>Your account may be suspended pending investigation</li>
-          <li>We reserve the right to dispute fraudulent chargebacks</li>
-          <li>Please contact us first to resolve any billing issues</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold text-white mb-4">9. Exceptions</h2>
-        <p>
-          We reserve the right to make exceptions to this policy on a case-by-case basis,
-          particularly for:
-        </p>
-        <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
-          <li>Long-term loyal customers</li>
-          <li>Documented service outages</li>
-          <li>Billing errors on our part</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold text-white mb-4">10. Contact Us</h2>
-        <p>
-          For refund requests or questions about this policy:
+          For questions about this policy or web purchase issues:
         </p>
         <ul className="list-none space-y-2 mt-3">
-          <li>Email: <a href="mailto:refunds@prismorph.com" className="text-primary-400 hover:text-primary-300">refunds@prismorph.com</a></li>
-          <li>Support: <a href="mailto:support@prismorph.com" className="text-primary-400 hover:text-primary-300">support@prismorph.com</a></li>
-          <li>Response time: 3-5 business days</li>
+          <li>Email: <a href="mailto:support@prismorph.com" className="text-primary-400 hover:text-primary-300">support@prismorph.com</a></li>
+          <li>Response time: 2-3 business days</li>
         </ul>
       </section>
 
       <section className="p-6 rounded-2xl bg-primary-500/10 border border-primary-500/20">
-        <h3 className="text-xl font-semibold text-white mb-3">Summary</h3>
+        <h3 className="text-xl font-semibold text-white mb-3">Quick Summary</h3>
         <div className="grid sm:grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="font-medium text-white">Credit Packs</p>
+            <p className="font-medium text-white">App Store / Google Play</p>
+            <p>Refunds handled by Apple/Google</p>
+          </div>
+          <div>
+            <p className="font-medium text-white">Web Credit Packs</p>
             <p>7-day refund window (if unused)</p>
           </div>
           <div>
-            <p className="font-medium text-white">Weekly/Monthly Subscription</p>
-            <p>48-hour refund window (if unused)</p>
+            <p className="font-medium text-white">Cancellation</p>
+            <p>Cancel anytime, access until period ends</p>
           </div>
           <div>
-            <p className="font-medium text-white">Annual Subscription</p>
-            <p>14-day refund window (if unused)</p>
-          </div>
-          <div>
-            <p className="font-medium text-white">Processing Time</p>
-            <p>5-10 business days</p>
+            <p className="font-medium text-white">Support</p>
+            <p>support@prismorph.com</p>
           </div>
         </div>
       </section>

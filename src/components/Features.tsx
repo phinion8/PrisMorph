@@ -45,7 +45,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 sm:py-32 relative">
+    <section id="features" className="py-12 sm:py-16 relative">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-0 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl" />
