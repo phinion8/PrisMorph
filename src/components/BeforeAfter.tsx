@@ -44,9 +44,74 @@ const transformations = [
 
 export default function BeforeAfter() {
   const [activeTransform, setActiveTransform] = useState(transformations[0]);
-  const [sliderPosition, setSliderPosition] = useState(50);
+  const [sliderPosition, setSliderPosition] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const animationRef = useRef<number | null>(null);
+
+  // Intersection Observer to detect when section is in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto-animation effect
+  useEffect(() => {
+    if (isInView && !isDragging && !hasInteracted && sliderPosition < 100) {
+      setIsAnimating(true);
+
+      const animate = () => {
+        setSliderPosition((prev) => {
+          if (prev >= 100) {
+            setIsAnimating(false);
+            return 100;
+          }
+          return prev + 0.3; // Slow smooth animation
+        });
+        animationRef.current = requestAnimationFrame(animate);
+      };
+
+      animationRef.current = requestAnimationFrame(animate);
+
+      return () => {
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+      };
+    }
+  }, [isInView, isDragging, hasInteracted, sliderPosition]);
+
+  // Resume animation when slider moves away from 100%
+  useEffect(() => {
+    if (sliderPosition < 95 && !isDragging && hasInteracted) {
+      setHasInteracted(false);
+    }
+  }, [sliderPosition, isDragging, hasInteracted]);
+
+  // Pause animation at 100%
+  useEffect(() => {
+    if (sliderPosition >= 100) {
+      setIsAnimating(false);
+      setHasInteracted(true);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    }
+  }, [sliderPosition]);
 
   const handleSliderChange = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -54,6 +119,11 @@ export default function BeforeAfter() {
     const x = clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setSliderPosition(percentage);
+    setHasInteracted(true);
+    setIsAnimating(false);
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -63,6 +133,15 @@ export default function BeforeAfter() {
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     if (isDragging) handleSliderChange(e.touches[0].clientX);
   }, [isDragging, handleSliderChange]);
+
+  const handleDragStart = useCallback(() => {
+    setIsDragging(true);
+    setHasInteracted(true);
+    setIsAnimating(false);
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+  }, []);
 
   useEffect(() => {
     const handleUp = () => setIsDragging(false);
@@ -74,8 +153,15 @@ export default function BeforeAfter() {
     };
   }, []);
 
+  // Reset animation when transformation changes
+  useEffect(() => {
+    setSliderPosition(0);
+    setHasInteracted(false);
+    setIsAnimating(false);
+  }, [activeTransform]);
+
   return (
-    <section id="showcase" className="py-12 sm:py-16 relative">
+    <section ref={sectionRef} id="showcase" className="py-12 sm:py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -83,8 +169,7 @@ export default function BeforeAfter() {
             See the <span className="text-gradient">Magic</span> in Action
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Drag the slider to reveal stunning transformations. Choose from dozens
-            of AI-powered effects.
+            Watch the transformation happen automatically, or drag the slider to control it yourself.
           </p>
         </div>
 
@@ -98,23 +183,8 @@ export default function BeforeAfter() {
               onTouchMove={handleTouchMove}
             >
               <div className="relative w-full h-full rounded-2xl overflow-hidden select-none">
-                {/* After Image */}
+                {/* Before Image (Background) */}
                 <div className="absolute inset-0">
-                  <Image
-                    src={activeTransform.afterImage}
-                    alt="After transformation"
-                    fill
-                    className="object-cover object-top"
-                    priority
-                    draggable={false}
-                  />
-                </div>
-
-                {/* Before Image */}
-                <div
-                  className="absolute inset-0"
-                  style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-                >
                   <Image
                     src={activeTransform.beforeImage}
                     alt="Before transformation"
@@ -125,6 +195,130 @@ export default function BeforeAfter() {
                   />
                 </div>
 
+                {/* After Image (Revealed) */}
+                <div
+                  className="absolute inset-0"
+                  style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                >
+                  <Image
+                    src={activeTransform.afterImage}
+                    alt="After transformation"
+                    fill
+                    className="object-cover object-top"
+                    priority
+                    draggable={false}
+                  />
+                </div>
+
+                {/* Magic Transformation Overlay Effect - Stars */}
+                {isAnimating && (
+                  <div
+                    className="absolute inset-0 pointer-events-none overflow-hidden"
+                    style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                  >
+                    {/* Animated twinkling stars */}
+                    {[...Array(15)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute animate-star-twinkle"
+                        style={{
+                          left: `${5 + (i * 6.5)}%`,
+                          top: `${8 + ((i * 13) % 85)}%`,
+                          fontSize: `${12 + (i % 4) * 5}px`,
+                          color: i % 3 === 0 ? 'rgba(217, 70, 239, 0.25)' : 'rgba(255, 255, 255, 0.2)',
+                          animationDuration: `${2.5 + (i % 3) * 0.8}s`,
+                          animationDelay: `${i * 0.15}s`,
+                          textShadow: '0 0 10px currentColor',
+                        }}
+                      >
+                        {i % 2 === 0 ? '✦' : '✧'}
+                      </div>
+                    ))}
+
+                    {/* Floating stars */}
+                    {[...Array(8)].map((_, i) => (
+                      <div
+                        key={`float-${i}`}
+                        className="absolute animate-star-float"
+                        style={{
+                          left: `${12 + (i * 11)}%`,
+                          top: `${15 + ((i * 17) % 70)}%`,
+                          fontSize: `${8 + (i % 3) * 3}px`,
+                          color: 'rgba(139, 92, 246, 0.3)',
+                          animationDuration: `${3 + (i % 2) * 1.5}s`,
+                          animationDelay: `${i * 0.25}s`,
+                        }}
+                      >
+                        ✦
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Water Flow Effect */}
+                {isAnimating && (
+                  <div
+                    className="absolute inset-0 pointer-events-none overflow-hidden"
+                    style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                  >
+                    {/* Shimmer wave overlay */}
+                    <div className="absolute inset-0 animate-shimmer-wave" />
+
+                    {/* Flowing water streams */}
+                    {[...Array(4)].map((_, i) => (
+                      <div
+                        key={`flow-${i}`}
+                        className="absolute h-full w-32 animate-water-flow"
+                        style={{
+                          top: 0,
+                          left: `${i * 25}%`,
+                          background: `linear-gradient(90deg, transparent, rgba(139, 92, 246, ${0.08 + i * 0.02}), rgba(217, 70, 239, ${0.1 + i * 0.02}), transparent)`,
+                          animationDuration: `${3 + i * 0.5}s`,
+                          animationDelay: `${i * 0.8}s`,
+                        }}
+                      />
+                    ))}
+
+                    {/* Ripple effects */}
+                    {[...Array(5)].map((_, i) => (
+                      <div
+                        key={`ripple-${i}`}
+                        className="absolute rounded-full animate-water-ripple"
+                        style={{
+                          width: `${60 + i * 20}px`,
+                          height: `${60 + i * 20}px`,
+                          left: `${10 + i * 18}%`,
+                          top: `${20 + ((i * 15) % 60)}%`,
+                          background: `radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)`,
+                          animationDuration: `${2 + i * 0.4}s`,
+                          animationDelay: `${i * 0.5}s`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Soft edge glow effect at slider position */}
+                {isAnimating && (
+                  <div
+                    className="absolute top-0 bottom-0 w-20 pointer-events-none"
+                    style={{
+                      left: `${sliderPosition}%`,
+                      transform: 'translateX(-50%)',
+                      background: 'linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.15), rgba(217, 70, 239, 0.2), rgba(139, 92, 246, 0.15), transparent)',
+                      filter: 'blur(8px)',
+                    }}
+                  />
+                )}
+
+                {/* Transformation Progress Indicator */}
+                {isAnimating && (
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/50 backdrop-blur-sm flex items-center gap-2 z-10">
+                    <div className="w-2 h-2 rounded-full bg-primary-400 animate-pulse" />
+                    <span className="text-white text-sm font-medium">Transforming...</span>
+                  </div>
+                )}
+
                 {/* Slider Line & Handle */}
                 <div
                   className="absolute top-0 bottom-0 z-10"
@@ -132,11 +326,11 @@ export default function BeforeAfter() {
                 >
                   {/* Vertical Line */}
                   <div
-                    className={`absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 transition-all duration-300 ${
-                      isDragging ? 'bg-primary-400' : 'bg-white'
+                    className={`absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 transition-colors duration-300 ${
+                      isDragging || isAnimating ? 'bg-primary-400' : 'bg-white'
                     }`}
                     style={{
-                      boxShadow: isDragging
+                      boxShadow: isDragging || isAnimating
                         ? '0 0 12px rgba(139, 92, 246, 0.8), 0 0 24px rgba(139, 92, 246, 0.4)'
                         : '0 0 8px rgba(255, 255, 255, 0.5)',
                     }}
@@ -145,21 +339,21 @@ export default function BeforeAfter() {
                   {/* Handle */}
                   <div
                     className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full cursor-ew-resize flex items-center justify-center transition-all duration-300 ${
-                      isDragging
+                      isDragging || isAnimating
                         ? 'bg-primary-500 scale-110'
                         : 'bg-white hover:scale-105'
                     }`}
                     style={{
-                      boxShadow: isDragging
+                      boxShadow: isDragging || isAnimating
                         ? '0 0 20px rgba(139, 92, 246, 0.6), 0 4px 12px rgba(0, 0, 0, 0.3)'
                         : '0 4px 12px rgba(0, 0, 0, 0.3)',
                     }}
-                    onMouseDown={() => setIsDragging(true)}
-                    onTouchStart={() => setIsDragging(true)}
+                    onMouseDown={handleDragStart}
+                    onTouchStart={handleDragStart}
                   >
                     <svg
                       className={`w-5 h-5 transition-colors duration-300 ${
-                        isDragging ? 'text-white' : 'text-gray-700'
+                        isDragging || isAnimating ? 'text-white' : 'text-gray-700'
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -181,9 +375,13 @@ export default function BeforeAfter() {
                   min="0"
                   max="100"
                   value={sliderPosition}
-                  onChange={(e) => setSliderPosition(Number(e.target.value))}
-                  onMouseDown={() => setIsDragging(true)}
-                  onTouchStart={() => setIsDragging(true)}
+                  onChange={(e) => {
+                    setSliderPosition(Number(e.target.value));
+                    setHasInteracted(true);
+                    setIsAnimating(false);
+                  }}
+                  onMouseDown={handleDragStart}
+                  onTouchStart={handleDragStart}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
                 />
               </div>
@@ -193,8 +391,18 @@ export default function BeforeAfter() {
             <div className="flex justify-between mt-4 px-4">
               <span className="text-gray-400 text-sm font-medium">Original</span>
               <span className="text-gradient text-sm font-medium">
-                {activeTransform.name}
+                {activeTransform.name} ✨
               </span>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="mt-3 px-4">
+              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-100"
+                  style={{ width: `${sliderPosition}%` }}
+                />
+              </div>
             </div>
           </div>
 

@@ -132,7 +132,7 @@ export default function Header() {
               <Link
                 href="/coming-soon"
                 onClick={() => setIsMenuOpen(false)}
-                className="mt-2 mb-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-center"
+                className="mt-2 mb-4 px-4 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-center"
               >
                 Get App
               </Link>
