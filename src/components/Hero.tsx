@@ -1,4 +1,11 @@
+"use client";
+
+import { useState } from "react";
+import DemoModal from "./DemoModal";
+
 export default function Hero() {
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 sm:pt-16 overflow-hidden">
       {/* Background Effects */}
@@ -40,13 +47,29 @@ export default function Hero() {
 
         {/* Watch Demo Button */}
         <div className="flex items-center justify-center mb-8">
-          <button className="px-8 py-4 rounded-full glass glass-hover text-white font-semibold text-lg flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-            Watch Demo
+          <button
+            onClick={() => setIsDemoOpen(true)}
+            className="group px-8 py-4 rounded-full glass glass-hover text-white font-semibold text-lg flex items-center gap-3 relative overflow-hidden"
+          >
+            {/* Animated background on hover */}
+            <span className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-accent-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+            {/* Play icon with pulse animation */}
+            <span className="relative flex items-center justify-center">
+              <span className="absolute w-10 h-10 rounded-full bg-primary-500/20 animate-ping" />
+              <span className="relative w-10 h-10 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center">
+                <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </span>
+
+            <span className="relative">Watch Demo</span>
           </button>
         </div>
+
+        {/* Demo Modal */}
+        <DemoModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
 
         {/* App Store Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">

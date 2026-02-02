@@ -1,6 +1,6 @@
 export default function CTA() {
   return (
-    <section id="pricing" className="py-20 sm:py-32 relative">
+    <section id="download" className="py-20 sm:py-32 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl overflow-hidden">
           {/* Background */}
@@ -29,9 +29,12 @@ export default function CTA() {
 
             {/* CTA Button */}
             <div className="flex items-center justify-center mb-8">
-              <button className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold text-lg hover:bg-white/20 transition-colors">
+              <a
+                href="#pricing"
+                className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold text-lg hover:bg-white/20 transition-colors"
+              >
                 View Pricing
-              </button>
+              </a>
             </div>
 
             {/* App Store Buttons */}
