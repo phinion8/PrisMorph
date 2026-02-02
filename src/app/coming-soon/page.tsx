@@ -1,71 +1,10 @@
-"use client";
+import CountdownTimer from "@/components/CountdownTimer";
+import NewsletterForm from "@/components/NewsletterForm";
 
-import { useState, useEffect } from "react";
+// Fixed launch date - February 18, 2026 at 00:00:00 UTC
+const LAUNCH_DATE = new Date("2026-02-18T00:00:00Z").getTime();
 
 export default function ComingSoon() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-  const [email, setEmail] = useState("");
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    // Set target date to 15 days from now (stored in localStorage to persist)
-    let targetDate: number;
-    const storedTarget = localStorage.getItem("prismorph-launch-date");
-
-    if (storedTarget) {
-      targetDate = parseInt(storedTarget);
-    } else {
-      targetDate = Date.now() + 15 * 24 * 60 * 60 * 1000;
-      localStorage.setItem("prismorph-launch-date", targetDate.toString());
-    }
-
-    const calculateTimeLeft = () => {
-      const now = Date.now();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / (1000 * 60)) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        });
-      } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-
-    setIsLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsLoading(false);
-    setIsSubscribed(true);
-    setEmail("");
-  };
-
-  const timeBlocks = [
-    { label: "Days", value: timeLeft.days },
-    { label: "Hours", value: timeLeft.hours },
-    { label: "Minutes", value: timeLeft.minutes },
-    { label: "Seconds", value: timeLeft.seconds },
-  ];
-
   return (
     <main className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 sm:py-8">
       {/* Background Effects */}
@@ -85,33 +24,36 @@ export default function ComingSoon() {
         }}
       />
 
-      {/* Tilted Rain Effect */}
+      {/* Snowfall Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="rain-drop" style={{ left: '2%', animationDuration: '2.5s', animationDelay: '0s', height: '25px' }} />
-        <div className="rain-drop" style={{ left: '7%', animationDuration: '3.0s', animationDelay: '0.5s', height: '30px' }} />
-        <div className="rain-drop" style={{ left: '12%', animationDuration: '2.3s', animationDelay: '1.0s', height: '18px' }} />
-        <div className="rain-drop" style={{ left: '17%', animationDuration: '2.8s', animationDelay: '0.3s', height: '28px' }} />
-        <div className="rain-drop" style={{ left: '22%', animationDuration: '2.6s', animationDelay: '1.2s', height: '22px' }} />
-        <div className="rain-drop" style={{ left: '27%', animationDuration: '3.2s', animationDelay: '0.7s', height: '35px' }} />
-        <div className="rain-drop" style={{ left: '32%', animationDuration: '2.2s', animationDelay: '1.5s', height: '15px' }} />
-        <div className="rain-drop" style={{ left: '37%', animationDuration: '2.9s', animationDelay: '0.2s', height: '26px' }} />
-        <div className="rain-drop" style={{ left: '42%', animationDuration: '2.5s', animationDelay: '1.8s', height: '20px' }} />
-        <div className="rain-drop" style={{ left: '47%', animationDuration: '3.1s', animationDelay: '0.9s', height: '32px' }} />
-        <div className="rain-drop" style={{ left: '52%', animationDuration: '2.4s', animationDelay: '2.0s', height: '17px' }} />
-        <div className="rain-drop" style={{ left: '57%', animationDuration: '2.7s', animationDelay: '0.4s', height: '24px' }} />
-        <div className="rain-drop" style={{ left: '62%', animationDuration: '2.9s', animationDelay: '1.3s', height: '28px' }} />
-        <div className="rain-drop" style={{ left: '67%', animationDuration: '3.3s', animationDelay: '0.6s', height: '33px' }} />
-        <div className="rain-drop" style={{ left: '72%', animationDuration: '2.2s', animationDelay: '1.7s', height: '16px' }} />
-        <div className="rain-drop" style={{ left: '77%', animationDuration: '2.6s', animationDelay: '0.8s', height: '23px' }} />
-        {/* Second layer for density */}
-        <div className="rain-drop" style={{ left: '5%', animationDuration: '2.7s', animationDelay: '2.2s', height: '22px' }} />
-        <div className="rain-drop" style={{ left: '15%', animationDuration: '2.5s', animationDelay: '2.5s', height: '19px' }} />
-        <div className="rain-drop" style={{ left: '25%', animationDuration: '2.9s', animationDelay: '2.3s', height: '29px' }} />
-        <div className="rain-drop" style={{ left: '35%', animationDuration: '2.3s', animationDelay: '2.7s', height: '18px' }} />
-        <div className="rain-drop" style={{ left: '45%', animationDuration: '3.1s', animationDelay: '2.1s', height: '34px' }} />
-        <div className="rain-drop" style={{ left: '55%', animationDuration: '2.4s', animationDelay: '2.6s', height: '20px' }} />
-        <div className="rain-drop" style={{ left: '65%', animationDuration: '2.8s', animationDelay: '2.4s', height: '26px' }} />
-        <div className="rain-drop" style={{ left: '75%', animationDuration: '2.6s', animationDelay: '2.8s', height: '23px' }} />
+        {/* Large snowflakes */}
+        <div className="snowflake" style={{ left: '5%', animationDuration: '8s', animationDelay: '0s', width: '10px', height: '10px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '15%', animationDuration: '10s', animationDelay: '1s', width: '8px', height: '8px' }} />
+        <div className="snowflake" style={{ left: '25%', animationDuration: '9s', animationDelay: '2s', width: '12px', height: '12px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '35%', animationDuration: '11s', animationDelay: '0.5s', width: '6px', height: '6px' }} />
+        <div className="snowflake" style={{ left: '45%', animationDuration: '8.5s', animationDelay: '3s', width: '9px', height: '9px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '55%', animationDuration: '10.5s', animationDelay: '1.5s', width: '11px', height: '11px' }} />
+        <div className="snowflake" style={{ left: '65%', animationDuration: '9.5s', animationDelay: '2.5s', width: '7px', height: '7px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '75%', animationDuration: '8s', animationDelay: '0.8s', width: '10px', height: '10px' }} />
+        <div className="snowflake" style={{ left: '85%', animationDuration: '11s', animationDelay: '3.5s', width: '8px', height: '8px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '95%', animationDuration: '9s', animationDelay: '1.8s', width: '6px', height: '6px' }} />
+        {/* Medium snowflakes */}
+        <div className="snowflake snowflake-drift" style={{ left: '10%', animationDuration: '12s', animationDelay: '4s', width: '5px', height: '5px' }} />
+        <div className="snowflake" style={{ left: '20%', animationDuration: '10s', animationDelay: '5s', width: '7px', height: '7px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '30%', animationDuration: '11s', animationDelay: '4.5s', width: '6px', height: '6px' }} />
+        <div className="snowflake" style={{ left: '40%', animationDuration: '9.5s', animationDelay: '5.5s', width: '8px', height: '8px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '50%', animationDuration: '10.5s', animationDelay: '4.2s', width: '5px', height: '5px' }} />
+        <div className="snowflake" style={{ left: '60%', animationDuration: '12s', animationDelay: '5.8s', width: '9px', height: '9px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '70%', animationDuration: '8.5s', animationDelay: '4.8s', width: '6px', height: '6px' }} />
+        <div className="snowflake" style={{ left: '80%', animationDuration: '11.5s', animationDelay: '5.2s', width: '7px', height: '7px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '90%', animationDuration: '9s', animationDelay: '4.6s', width: '5px', height: '5px' }} />
+        {/* Small snowflakes */}
+        <div className="snowflake" style={{ left: '8%', animationDuration: '13s', animationDelay: '6s', width: '4px', height: '4px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '22%', animationDuration: '14s', animationDelay: '7s', width: '3px', height: '3px' }} />
+        <div className="snowflake" style={{ left: '38%', animationDuration: '12s', animationDelay: '6.5s', width: '4px', height: '4px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '52%', animationDuration: '13.5s', animationDelay: '7.5s', width: '3px', height: '3px' }} />
+        <div className="snowflake" style={{ left: '68%', animationDuration: '11s', animationDelay: '6.2s', width: '4px', height: '4px' }} />
+        <div className="snowflake snowflake-drift" style={{ left: '82%', animationDuration: '14s', animationDelay: '7.2s', width: '3px', height: '3px' }} />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -158,164 +100,10 @@ export default function ComingSoon() {
         </p>
 
         {/* Countdown Timer */}
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-16">
-          {timeBlocks.map((block, index) => (
-            <div key={block.label} className="relative group">
-              <div className="w-24 sm:w-32 h-28 sm:h-36 rounded-2xl glass flex flex-col items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-gradient">
-                  {block.value.toString().padStart(2, "0")}
-                </span>
-                <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider mt-2">
-                  {block.label}
-                </span>
-              </div>
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-500/20 to-accent-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-
-              {/* Separator */}
-              {index < timeBlocks.length - 1 && (
-                <div className="hidden sm:flex absolute -right-3 top-1/2 -translate-y-1/2 flex-col gap-2">
-                  <span className="w-2 h-2 rounded-full bg-primary-400 animate-pulse" />
-                  <span className="w-2 h-2 rounded-full bg-accent-400 animate-pulse delay-500" />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        <CountdownTimer targetDate={LAUNCH_DATE} />
 
         {/* Newsletter Section */}
-        <div className="max-w-lg mx-auto">
-          <div className="glass rounded-3xl p-8 sm:p-10">
-            <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500/20 to-accent-500/20 mx-auto mb-6">
-              <svg
-                className="w-8 h-8 text-primary-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-
-            <h3 className="text-2xl font-bold text-white mb-3">
-              Get Notified at Launch
-            </h3>
-            <p className="text-gray-400 mb-6">
-              Subscribe to our newsletter and be the first to know when we launch.
-              Plus, get exclusive early access and special offers.
-            </p>
-
-            {isSubscribed ? (
-              <div className="flex items-center justify-center gap-3 py-4 px-6 rounded-2xl bg-green-500/10 border border-green-500/20">
-                <svg
-                  className="w-6 h-6 text-green-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <span className="text-green-400 font-medium">
-                  You're on the list! We'll notify you at launch.
-                </span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="space-y-4">
-                <div className="relative">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    required
-                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary-500/50 focus:ring-2 focus:ring-primary-500/20 transition-all"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold text-lg hover:opacity-90 transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
-                >
-                  {isLoading ? (
-                    <>
-                      <svg
-                        className="animate-spin w-5 h-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        />
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        />
-                      </svg>
-                      <span>Subscribing...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Notify Me</span>
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                        />
-                      </svg>
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-
-            {/* Trust indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-6 text-xs text-gray-500">
-              <span className="flex items-center gap-1">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                No spam, ever
-              </span>
-              <span className="flex items-center gap-1">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Unsubscribe anytime
-              </span>
-            </div>
-          </div>
-        </div>
+        <NewsletterForm />
 
         {/* App Store Coming Soon */}
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
