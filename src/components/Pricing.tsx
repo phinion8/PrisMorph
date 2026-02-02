@@ -194,7 +194,6 @@ export default function Pricing() {
                 {/* CTA Button */}
                 <a
                   href="/coming-soon"
-                  target="_blank"
                   className={`block w-full py-3.5 rounded-2xl font-semibold text-center transition-all duration-300 mt-8 ${
                     plan.popular
                       ? "bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:opacity-90 shadow-lg shadow-primary-500/25"
@@ -270,7 +269,6 @@ export default function Pricing() {
                     {/* Buy Button */}
                     <a
                       href="/coming-soon"
-                      target="_blank"
                       className={`block w-full py-3 rounded-xl font-semibold text-center transition-all duration-300 ${
                         pack.popular
                           ? "bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:opacity-90"

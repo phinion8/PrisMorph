@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import DemoModal from "./DemoModal";
+import Button3D from "./Button3D";
 
 export default function Hero() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -9,15 +10,15 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 sm:pt-16 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary-500/30 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-accent-500/30 rounded-full blur-3xl animate-pulse-slow delay-1000" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl animate-pulse-slow delay-1000" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-full blur-3xl" />
       </div>
 
       {/* Grid Pattern */}
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-10 pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
                            linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px)`,
@@ -45,39 +46,40 @@ export default function Hero() {
           into extraordinary masterpieces. From artistic styles to magical effects.
         </p>
 
-        {/* Watch Demo Button */}
-        <div className="flex items-center justify-center mb-8">
-          <button
-            onClick={() => setIsDemoOpen(true)}
-            className="group px-8 py-4 rounded-full glass glass-hover text-white font-semibold text-lg flex items-center gap-3 relative overflow-hidden"
-          >
-            {/* Animated background on hover */}
-            <span className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-accent-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-            {/* Play icon with pulse animation */}
-            <span className="relative flex items-center justify-center">
-              <span className="absolute w-10 h-10 rounded-full bg-primary-500/20 animate-ping" />
-              <span className="relative w-10 h-10 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </span>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+          <Button3D variant="primary" size="lg" onClick={() => setIsDemoOpen(true)}>
+            <span className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Watch Demo
             </span>
-
-            <span className="relative">Watch Demo</span>
-          </button>
+          </Button3D>
+          <Button3D variant="secondary" size="lg" href="/coming-soon">
+            Get Started Free
+          </Button3D>
         </div>
 
-        {/* Demo Modal */}
-        <DemoModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
-
-        {/* App Store Buttons */}
+        {/* App Store Buttons with 3D hover */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
           <a
             href="/coming-soon"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-black border border-white/20 hover:border-white/40 transition-all hover:scale-105 min-w-[180px]"
+            className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-black border border-white/20 hover:border-white/40 transition-all min-w-[180px]"
+            style={{ transformStyle: "preserve-3d" }}
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              const centerX = rect.width / 2;
+              const centerY = rect.height / 2;
+              const rotateX = (y - centerY) / 15;
+              const rotateY = (centerX - x) / 15;
+              e.currentTarget.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "perspective(500px) rotateX(0) rotateY(0) scale(1)";
+            }}
           >
             <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
@@ -89,9 +91,21 @@ export default function Hero() {
           </a>
           <a
             href="/coming-soon"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-black border border-white/20 hover:border-white/40 transition-all hover:scale-105 min-w-[180px]"
+            className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-black border border-white/20 hover:border-white/40 transition-all min-w-[180px]"
+            style={{ transformStyle: "preserve-3d" }}
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              const centerX = rect.width / 2;
+              const centerY = rect.height / 2;
+              const rotateX = (y - centerY) / 15;
+              const rotateY = (centerX - x) / 15;
+              e.currentTarget.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "perspective(500px) rotateX(0) rotateY(0) scale(1)";
+            }}
           >
             <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
@@ -118,8 +132,10 @@ export default function Hero() {
             <div className="text-gray-400 text-sm">Happy Users</div>
           </div>
         </div>
-
       </div>
+
+      {/* Demo Modal */}
+      <DemoModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
     </section>
   );
 }
