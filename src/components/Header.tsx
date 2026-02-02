@@ -73,7 +73,7 @@ export default function Header() {
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button - Desktop */}
           <div className="hidden md:block">
             <Link
               href="/coming-soon"
@@ -117,7 +117,7 @@ export default function Header() {
             isMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-4 pb-4 pt-2 border-t border-white/10">
+          <div className="px-4 pb-6 pt-2 border-t border-white/10">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
@@ -132,7 +132,7 @@ export default function Header() {
               <Link
                 href="/coming-soon"
                 onClick={() => setIsMenuOpen(false)}
-                className="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-center"
+                className="mt-2 mb-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-medium text-center"
               >
                 Get App
               </Link>

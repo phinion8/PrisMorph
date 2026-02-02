@@ -46,8 +46,8 @@ export default function Hero() {
           into extraordinary masterpieces. From artistic styles to magical effects.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+        {/* CTA Button */}
+        <div className="flex items-center justify-center mb-10">
           <Button3D variant="primary" size="lg" onClick={() => setIsDemoOpen(true)}>
             <span className="flex items-center gap-2">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -55,9 +55,6 @@ export default function Hero() {
               </svg>
               Watch Demo
             </span>
-          </Button3D>
-          <Button3D variant="secondary" size="lg" href="/coming-soon">
-            Get Started Free
           </Button3D>
         </div>
 
