@@ -1,27 +1,24 @@
 const footerLinks = {
   product: [
     { name: "Features", href: "#features" },
+    { name: "How it Works", href: "#how-it-works" },
     { name: "Gallery", href: "#gallery" },
     { name: "Pricing", href: "#pricing" },
-    { name: "API", href: "#" },
   ],
   company: [
-    { name: "About", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Press", href: "#" },
+    { name: "About Us", href: "#about" },
+    { name: "Blog", href: "#blog" },
+    { name: "Contact", href: "mailto:hello@prismorph.com" },
   ],
   resources: [
-    { name: "Help Center", href: "#" },
-    { name: "Community", href: "#" },
-    { name: "Tutorials", href: "#" },
-    { name: "Status", href: "#" },
+    { name: "Help Center", href: "mailto:support@prismorph.com" },
+    { name: "FAQs", href: "#pricing" },
+    { name: "Tutorials", href: "#how-it-works" },
   ],
   legal: [
-    { name: "Privacy", href: "#" },
-    { name: "Terms", href: "#" },
-    { name: "Cookies", href: "#" },
-    { name: "Licenses", href: "#" },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Terms of Service", href: "/terms" },
+    { name: "Refund Policy", href: "/refund" },
   ],
 };
 
