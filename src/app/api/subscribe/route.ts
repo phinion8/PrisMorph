@@ -39,9 +39,9 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error("Resend API error:", errorData);
+      console.error("Resend API error:", response.status, errorData);
 
-      if (response.status === 409) {
+      if (response.status === 409 || errorData?.name === "validation_error") {
         // Already subscribed
         return NextResponse.json(
           { message: "Already subscribed", alreadySubscribed: true },
@@ -50,8 +50,8 @@ export async function POST(request: NextRequest) {
       }
 
       return NextResponse.json(
-        { error: "Failed to subscribe" },
-        { status: 500 }
+        { error: errorData?.message || "Failed to subscribe" },
+        { status: response.status }
       );
     }
 
