@@ -37,11 +37,13 @@ export async function POST(request: NextRequest) {
       }
     );
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error("Resend API error:", response.status, errorData);
+    const data = await response.json().catch(() => ({}));
+    console.log("Resend response:", response.status, JSON.stringify(data));
 
-      if (response.status === 409 || errorData?.name === "validation_error") {
+    if (!response.ok) {
+      console.error("Resend API error:", response.status, data);
+
+      if (response.status === 409 || data?.name === "validation_error") {
         // Already subscribed
         return NextResponse.json(
           { message: "Already subscribed", alreadySubscribed: true },
@@ -50,13 +52,13 @@ export async function POST(request: NextRequest) {
       }
 
       return NextResponse.json(
-        { error: errorData?.message || "Failed to subscribe" },
+        { error: data?.message || "Failed to subscribe" },
         { status: response.status }
       );
     }
 
     return NextResponse.json(
-      { message: "Successfully subscribed" },
+      { message: "Successfully subscribed", data },
       { status: 200 }
     );
   } catch (error) {
