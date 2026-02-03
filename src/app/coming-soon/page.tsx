@@ -7,7 +7,7 @@ const LAUNCH_DATE = new Date("2026-02-18T00:00:00Z").getTime();
 
 export default function ComingSoon() {
   return (
-    <main className="min-h-screen flex items-center justify-center relative overflow-hidden py-8 sm:py-8">
+    <main className="min-h-screen flex items-center justify-center relative overflow-hidden py-8 pb-16 sm:py-8">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-primary-500/20 rounded-full blur-3xl animate-pulse" />

@@ -105,11 +105,11 @@ export default function TransformationPreview() {
             />
 
             {/* Labels */}
-            <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-black/50 backdrop-blur-sm">
-              <span className="text-[10px] sm:text-xs text-white/80">Original</span>
+            <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md bg-black/50 backdrop-blur-sm flex items-center justify-center">
+              <span className="text-[10px] sm:text-xs text-white/80 leading-none">Original</span>
             </div>
-            <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-gradient-to-r from-primary-500/80 to-accent-500/80 backdrop-blur-sm">
-              <span className="text-[10px] sm:text-xs text-white font-medium">AI Magic</span>
+            <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md bg-gradient-to-r from-primary-500/80 to-accent-500/80 backdrop-blur-sm flex items-center justify-center">
+              <span className="text-[10px] sm:text-xs text-white font-medium leading-none">AI Magic</span>
             </div>
           </div>
         </div>
