@@ -8,6 +8,10 @@
   --background-end-rgb: 20, 10, 30;
 }
 
+html {
+  background-color: rgb(10, 10, 20);
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -16,6 +20,11 @@ body {
       rgb(var(--background-end-rgb))
     );
   min-height: 100vh;
+  /* iOS safe area support */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 @layer utilities {

@@ -45,6 +45,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
@@ -253,10 +254,12 @@ export default function RootLayout({
         />
         {/* iOS Safari status bar styling */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        {/* Android Chrome toolbar color */}
-        <meta name="theme-color" content="#0a0a14" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        {/* Theme color for browser chrome - matches site background */}
+        <meta name="theme-color" content="#0a0a14" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#0a0a14" media="(prefers-color-scheme: light)" />
         <meta name="msapplication-navbutton-color" content="#0a0a14" />
+        <meta name="msapplication-TileColor" content="#0a0a14" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
