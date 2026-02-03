@@ -144,7 +144,7 @@ Convert photos into detailed pencil or charcoal sketches. Unique and eye-catchin
 
 ## Transform Your Feed with Prismorph
 
-All these filters and more are available on Prismorph. Start transforming your Instagram content today and watch your engagement soar!
+All these filters and more are available in Prismorph. Start transforming your Instagram content today and watch your engagement soar!
     `,
     coverImage: "/blog/instagram-filters.jpg",
     author: {

@@ -59,31 +59,42 @@ export default function NewsletterForm() {
         </div>
 
         <h3 className="text-2xl font-bold text-white mb-3">
-          Get Notified at Launch
+          Don&apos;t Miss Out
         </h3>
-        <p className="text-gray-400 mb-6">
-          Subscribe to our newsletter and be the first to know when we launch.
-          Plus, get exclusive early access and special offers.
+        <p className="text-gray-400 mb-4">
+          Join the waitlist now and unlock exclusive perks that won&apos;t be available after launch.
         </p>
+        <div className="flex items-center justify-center gap-2 mb-6 text-sm">
+          <span className="px-3 py-1 rounded-full bg-accent-500/20 text-accent-300 font-medium">
+            2,847+ already joined
+          </span>
+        </div>
 
         {isSubscribed ? (
-          <div className="flex items-center justify-center gap-3 py-4 px-6 rounded-2xl bg-green-500/10 border border-green-500/20">
-            <svg
-              className="w-6 h-6 text-green-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span className="text-green-400 font-medium">
-              You're on the list! We'll notify you at launch.
-            </span>
+          <div className="py-6 px-6 rounded-2xl bg-green-500/10 border border-green-500/20 text-center">
+            <div className="flex items-center justify-center mb-3">
+              <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                <svg
+                  className="w-6 h-6 text-green-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p className="text-green-400 font-semibold text-lg mb-1">
+              You&apos;re In!
+            </p>
+            <p className="text-gray-400 text-sm">
+              Your 10 free credits are reserved. Check your inbox for a confirmation.
+            </p>
           </div>
         ) : (
           <form onSubmit={handleSubscribe} className="space-y-4">
@@ -130,7 +141,7 @@ export default function NewsletterForm() {
                 </>
               ) : (
                 <>
-                  <span>Notify Me</span>
+                  <span>Claim My Spot</span>
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -141,7 +152,7 @@ export default function NewsletterForm() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
                     />
                   </svg>
                 </>
@@ -159,7 +170,7 @@ export default function NewsletterForm() {
                 clipRule="evenodd"
               />
             </svg>
-            No spam, ever
+            Your data is safe with us
           </span>
           <span className="flex items-center gap-1">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -169,7 +180,7 @@ export default function NewsletterForm() {
                 clipRule="evenodd"
               />
             </svg>
-            Unsubscribe anytime
+            Free credits on signup
           </span>
         </div>
       </div>

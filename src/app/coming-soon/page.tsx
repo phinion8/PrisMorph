@@ -1,5 +1,6 @@
 import CountdownTimer from "@/components/CountdownTimer";
 import NewsletterForm from "@/components/NewsletterForm";
+import TransformationPreview from "@/components/TransformationPreview";
 
 // Fixed launch date - February 18, 2026 at 00:00:00 UTC
 const LAUNCH_DATE = new Date("2026-02-18T00:00:00Z").getTime();
@@ -83,21 +84,46 @@ export default function ComingSoon() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-accent-500"></span>
           </span>
-          <span className="text-sm font-medium text-gray-200">Mobile App Coming Soon</span>
+          <span className="text-sm font-medium text-gray-200">Limited Early Access Spots Available</span>
         </div>
 
         {/* Main Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-          <span className="text-white">Something Amazing</span>
+          <span className="text-white">The Future of</span>
           <br />
-          <span className="text-gradient">Is On The Way</span>
+          <span className="text-gradient">Photo Transformation</span>
         </h1>
 
         {/* Description */}
-        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-12">
-          We're working hard to bring Prismorph to your pocket. Transform photos
-          into stunning art anywhere, anytime. Be the first to experience the magic.
+        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+          50+ AI-powered filters that turn ordinary photos into museum-worthy art in seconds.
+          No design skills needed. Just pure magic at your fingertips.
         </p>
+
+        {/* Transformation Preview */}
+        <TransformationPreview />
+
+        {/* Exclusive Benefits */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20">
+            <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            <span className="text-sm text-green-300">10 Free Credits at Launch</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20">
+            <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            <span className="text-sm text-purple-300">Early Access Before Public</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20">
+            <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            <span className="text-sm text-amber-300">Exclusive Launch Discounts</span>
+          </div>
+        </div>
 
         {/* Countdown Timer */}
         <CountdownTimer targetDate={LAUNCH_DATE} />

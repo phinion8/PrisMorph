@@ -38,7 +38,7 @@ const faqs = [
       },
       {
         q: "Can I get a refund?",
-        a: "For App Store/Google Play purchases, refunds are handled by Apple or Google respectively. For web purchases, unused credit packs can be refunded within 7 days. See our Refund Policy for details.",
+        a: "For App Store/Google Play purchases, refunds are handled by Apple or Google, respectively. For web purchases, unused credit packs can be refunded within 7 days. See our Refund Policy for details.",
       },
     ],
   },
