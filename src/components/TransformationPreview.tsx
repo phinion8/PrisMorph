@@ -40,10 +40,10 @@ export default function TransformationPreview() {
   }, [isAnimating, direction]);
 
   return (
-    <div className="mb-10">
+    <div className="mb-8 sm:mb-10">
       {/* Preview Container */}
-      <div className="relative max-w-md mx-auto">
-        <div className="relative aspect-[4/5] rounded-2xl overflow-hidden glass p-1.5">
+      <div className="relative max-w-[280px] sm:max-w-md mx-auto">
+        <div className="relative aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden glass p-1">
           <div className="relative w-full h-full rounded-xl overflow-hidden">
             {/* Before Image */}
             <div className="absolute inset-0">
@@ -105,17 +105,17 @@ export default function TransformationPreview() {
             />
 
             {/* Labels */}
-            <div className="absolute bottom-3 left-3 px-2 py-1 rounded-md bg-black/50 backdrop-blur-sm">
-              <span className="text-xs text-white/80">Original</span>
+            <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-black/50 backdrop-blur-sm">
+              <span className="text-[10px] sm:text-xs text-white/80">Original</span>
             </div>
-            <div className="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-gradient-to-r from-primary-500/80 to-accent-500/80 backdrop-blur-sm">
-              <span className="text-xs text-white font-medium">AI Magic</span>
+            <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-gradient-to-r from-primary-500/80 to-accent-500/80 backdrop-blur-sm">
+              <span className="text-[10px] sm:text-xs text-white font-medium">AI Magic</span>
             </div>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="mt-3 px-4">
+        <div className="mt-2 sm:mt-3 px-2 sm:px-4">
           <div className="h-1 bg-white/10 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-primary-500 to-accent-500"
@@ -126,11 +126,11 @@ export default function TransformationPreview() {
       </div>
 
       {/* Call to Action Text */}
-      <div className="mt-6 text-center">
-        <p className="text-lg sm:text-xl text-white font-medium mb-2">
+      <div className="mt-4 sm:mt-6 text-center">
+        <p className="text-base sm:text-xl text-white font-medium mb-1 sm:mb-2">
           Want to create transformations like this?
         </p>
-        <p className="text-gray-400">
+        <p className="text-sm sm:text-base text-gray-400">
           Anime, Cyberpunk, Oil Painting, and 50+ more styles await you.
         </p>
       </div>
