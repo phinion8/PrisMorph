@@ -2,8 +2,8 @@ import CountdownTimer from "@/components/CountdownTimer";
 import NewsletterForm from "@/components/NewsletterForm";
 import TransformationPreview from "@/components/TransformationPreview";
 
-// Fixed launch date - February 18, 2026 at 00:00:00 UTC
-const LAUNCH_DATE = new Date("2026-02-18T00:00:00Z").getTime();
+// Launch date - 20 days from March 11, 2026 = March 31, 2026
+const LAUNCH_DATE = new Date("2026-03-31T00:00:00Z").getTime();
 
 export default function ComingSoon() {
   return (

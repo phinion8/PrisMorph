@@ -121,12 +121,12 @@ export default function Hero() {
             <div className="text-gray-400 text-sm">AI Filters</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-white">1M+</div>
-            <div className="text-gray-400 text-sm">Photos Transformed</div>
+            <div className="text-3xl sm:text-4xl font-bold text-white">4K</div>
+            <div className="text-gray-400 text-sm">Max Resolution</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold text-white">100K+</div>
-            <div className="text-gray-400 text-sm">Happy Users</div>
+            <div className="text-3xl sm:text-4xl font-bold text-white">&lt;10s</div>
+            <div className="text-gray-400 text-sm">Processing Time</div>
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@ export default function NewsletterForm() {
         </p>
         <div className="flex items-center justify-center gap-2 mb-6 text-sm">
           <span className="px-3 py-1 rounded-full bg-accent-500/20 text-accent-300 font-medium">
-            2,847+ already joined
+            Be among the first to try
           </span>
         </div>
 

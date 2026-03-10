@@ -23,8 +23,8 @@ export default function CTA() {
               Ready to Transform Your Photos?
             </h2>
             <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-10">
-              Join over 100,000 creators who are already using Prismorph to bring
-              their photos to life. Start for free, no credit card required.
+              Be among the first creators to experience the future of photo
+              transformation. Start for free, no credit card required.
             </p>
 
             {/* CTA Button */}
